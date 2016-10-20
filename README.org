@@ -5,15 +5,15 @@ The goal of this project is to create a set of functions that make
 exploratory data analysis with common lisp fun and easy. The function
 will provide some default behavior for more powerful common lisp libraries:
  - io :: data input and output from to data base
-   - using cl-csv, cl-sql
+   - using [[https://github.com/AccelerationNet/cl-csv][cl-csv]], [[https://github.com/sshirokov/CLSQL][cl-sql]], [[https://github.com/fukamachi/cl-dbi][cl-dbi]]
  - tidy :: data manipulation
-   - using group-by, alexandria
+   - using [[https://github.com/AccelerationNet/group-by][group-by]], [[https://gitlab.common-lisp.net/alexandria/alexandria][alexandria]]
  - plot :: summary graphs
-   - using eazy-gnuplot
+   - using [[https://github.com/guicho271828/eazy-gnuplot][eazy-gnuplot]]
  - stats :: summary statistics
-   - using lhstats and alexandria
+   - using [[https://github.com/mrc/lhstats][lhstats]] and [[https://gitlab.common-lisp.net/alexandria/alexandria][alexandria]]
 
-The end result should allow the user to load some data, quickly
+The end result should allow the user to load some data and quickly
 manipulate, summarize and visualize.
 
 * Approach
@@ -34,7 +34,7 @@ Functions to manipulate  a lopl
 - [ ] sort
 ** stats [0/1]
 - [ ] frequency
-** plots [0/7]
+** plots [1/7]
 - [ ] bar chart
 - [ ] histogram
 - [ ] density plot
