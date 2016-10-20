@@ -1,0 +1,44 @@
+#+TITLE: Lantern
+
+* Overview
+The goal of this project is to create a set of functions that make
+exploratory data analysis with common lisp fun and easy. The function
+will provide some default behavior for more powerful common lisp libraries:
+ - io :: data input and output from to data base
+   - using cl-csv, cl-sql
+ - tidy :: data manipulation
+   - using group-by, alexandria
+ - plot :: summary graphs
+   - using eazy-gnuplot
+ - stats :: summary statistics
+   - using lhstats and alexandria
+
+The end result should allow the user to load some data, quickly
+manipulate, summarize and visualize.
+
+* Approach
+The approach is inspired by clojure incanter, except there will not be a
+data-set structure. Instead, lists of p-lists (lopl) will be used to manipulate data.
+
+* Todo
+Everything, but here is the initial wish list
+** io
+Functions to create a list of p-lists (lopl)
+*** TODO convert strings to numbers when loaded
+** tidy
+Functions to manipulate on a lopl
+*** TODO filter rows
+*** TODO select columns
+*** TODO aggregate
+*** TODO transform
+*** TODO sort
+** stats
+*** TODO frequency
+** plots
+*** TODO bar chart
+*** TODO histogram
+*** TODO density plot
+*** TODO scatter plot
+*** TODO box plot
+*** TODO cumsum plot
+*** TODO timeseries plot
