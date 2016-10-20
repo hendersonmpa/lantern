@@ -22,23 +22,23 @@ data-set structure. Instead, lists of p-lists (lopl) will be used to manipulate 
 
 * Todo
 Everything, but here is the initial wish list
-** io
+** io [0/1]
 Functions to create a list of p-lists (lopl)
-*** TODO convert strings to numbers when loaded
-** tidy
-Functions to manipulate on a lopl
-*** TODO filter rows
-*** TODO select columns
-*** TODO aggregate
-*** TODO transform
-*** TODO sort
-** stats
-*** TODO frequency
-** plots
-*** TODO bar chart
-*** TODO histogram
-*** TODO density plot
-*** TODO scatter plot
-*** TODO box plot
-*** TODO cumsum plot
-*** TODO timeseries plot
+- [ ] convert strings to numbers when loaded
+** tidy [0/5]
+Functions to manipulate  a lopl
+- [ ] filter rows
+- [ ] select columns
+- [ ] aggregate
+- [ ] transform
+- [ ] sort
+** stats [0/1]
+- [ ] frequency
+** plots [0/7]
+- [ ] bar chart
+- [ ] histogram
+- [ ] density plot
+- [ ] scatter plot
+- [ ] box plot
+- [ ] cumsum plot
+- [ ] timeseries plot
