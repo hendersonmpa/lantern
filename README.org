@@ -21,7 +21,7 @@ The approach is inspired by clojure incanter, except there will not be a
 data-set structure. Instead, lists of p-lists (lopl) will be used to manipulate data.
 
 * Todo
-Everything, but here is the initial wish list
+  Everything, but here is the initial wish list
 ** io [0/1]
 Functions to create a list of p-lists (lopl)
 - [ ] convert strings to numbers when loaded
@@ -42,3 +42,10 @@ Functions to manipulate  a lopl
 - [ ] box plot
 - [ ] cumsum plot
 - [ ] timeseries plot
+
+* Examples
+#+BEGIN_SRC lisp
+(->> (load-csv "cars.csv")
+     (select-rows '(:and (:> :mpg 15) (:= :cyl 4)
+                    (:not (:= :name "Datsun 710")))))
+#+END_SRC

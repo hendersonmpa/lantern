@@ -1,5 +1,5 @@
 ;;;; package.lisp
 
 (defpackage #:lantern
-  (:use #:cl))
-
+  (:use #:cl
+        #:cl-arrows))

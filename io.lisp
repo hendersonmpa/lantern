@@ -10,18 +10,21 @@
            (up-row (mapcar #'string-upcase row)))
       (mapcar #'alexandria:make-keyword up-row))))
 
+
 (defparameter *header* (get-header "cars.csv"))
 
 (defun load-csv (file-name)
   "Read a csv into a plist with column names as keys"
   ;; TODO: allow optional header values
-  (flet ((make-plist (row header)
-           (mapcan #'list header row)))
+  (flet ((process-row (row header)
+           (let ((processed
+                  (mapcar #'handler-parse-number row)))
+             (mapcan #'list header processed))))
     (let ((header (get-header file-name)))
       (with-open-file (in file-name
                           :direction :input)
         (cl-csv:read-csv in
-                         :map-fn #'(lambda (row) (make-plist row header))
+                         :map-fn #'(lambda (row) (process-row row header))
                          :skip-first-p 1
                          :separator #\,
                          :quote nil ;; there are quotes in comment strings

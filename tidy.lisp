@@ -7,7 +7,6 @@
 
 
 ;;; From http://lispblog.xach.com/post/147048601608/querying-plists
-
 (defun compile-plist-query (query)
   (labels ((callfun (object)
              (lambda (fun)
@@ -48,7 +47,3 @@
 
 (defun select-rows (query plists)
   (remove-if-not (compile-plist-query query) plists))
-
-;; (select-rows '(:and (:> :mpg 15) (:= :cyl 4)
-;;                 (:not (:= :last-name "Beane")))
-;;               *people*)
