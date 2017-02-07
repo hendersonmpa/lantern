@@ -6,8 +6,8 @@
 ;;; Manipulations: filter, transform, aggregate and sort
 
 
-;;; From http://lispblog.xach.com/post/147048601608/querying-plists
 (defun compile-plist-query (query)
+  ;;; From http://lispblog.xach.com/post/147048601608/querying-plists
   (labels ((callfun (object)
              (lambda (fun)
                (funcall fun object)))
@@ -47,3 +47,17 @@
 
 (defun select-rows (query plists)
   (remove-if-not (compile-plist-query query) plists))
+
+(defun get-cols (cols row)
+  (labels ((get-cols-aux (cols accum)
+             (if (null cols) accum
+                 (let ((col (first cols)))
+                   (get-cols-aux (rest cols)
+                                 (cons (list col (getf row col)) accum))))))
+    (get-cols-aux cols nil)))
+
+(defun select-cols (cols plists)
+  "Return a list containing the data in COLS for each row"
+  (let ((accum nil))
+    (dolist (row plists accum)
+      (push (apply #'nconc (reverse (get-cols cols row))) accum))))

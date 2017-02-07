@@ -18,16 +18,17 @@ manipulate, summarize and visualize.
 
 * Approach
 The approach is inspired by clojure incanter, except there will not be a
-data-set structure. Instead, lists of p-lists (lopl) will be used to manipulate data.
+data-set structure. Instead, plists will be used to manipulate data.
 
 * Todo
   Everything, but here is the initial wish list
+
 ** io [0/1]
 Functions to create a list of p-lists (lopl)
 - [ ] convert strings to numbers when loaded
-** tidy [0/5]
-Functions to manipulate  a lopl
-- [ ] filter rows
+** tidy [1/5]
+Functions to manipulate  a plist
+- [X] select rows
 - [ ] select columns
 - [ ] aggregate
 - [ ] transform
@@ -44,8 +45,12 @@ Functions to manipulate  a lopl
 - [ ] timeseries plot
 
 * Examples
+** Select rows
 #+BEGIN_SRC lisp
 (->> (load-csv "cars.csv")
      (select-rows '(:and (:> :mpg 15) (:= :cyl 4)
                     (:not (:= :name "Datsun 710")))))
 #+END_SRC
+
+** Select columns
+   todo

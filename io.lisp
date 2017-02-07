@@ -10,17 +10,14 @@
            (up-row (mapcar #'string-upcase row)))
       (mapcar #'alexandria:make-keyword up-row))))
 
-
-(defparameter *header* (get-header "cars.csv"))
-
-(defun load-csv (file-name)
+(defun load-csv (file-name &key (col-names nil))
   "Read a csv into a plist with column names as keys"
-  ;; TODO: allow optional header values
   (flet ((process-row (row header)
            (let ((processed
                   (mapcar #'handler-parse-number row)))
              (mapcan #'list header processed))))
-    (let ((header (get-header file-name)))
+    (let ((header (if col-names col-names
+                      (get-header file-name))))
       (with-open-file (in file-name
                           :direction :input)
         (cl-csv:read-csv in
