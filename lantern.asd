@@ -13,5 +13,6 @@
   :components ((:file "package")
                (:file "lantern")
                (:file "utilities")
+               (:file "stats")
                (:file "io")
                (:file "tidy")))
