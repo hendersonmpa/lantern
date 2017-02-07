@@ -10,8 +10,7 @@
            (up-row (mapcar #'string-upcase row)))
       (mapcar #'alexandria:make-keyword up-row))))
 
-
-(defparameter *header* (get-header "cars.csv"))
+;;(defparameter *header* (get-header "cars.csv"))
 
 (defun load-csv (file-name)
   "Read a csv into a plist with column names as keys"
