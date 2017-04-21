@@ -102,3 +102,5 @@
 
 (defun normalize-for-column (value column)
   (funcall (value-normalizer column) value column))
+
+(defun load-database ())
