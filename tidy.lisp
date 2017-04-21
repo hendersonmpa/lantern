@@ -1,4 +1,6 @@
 ;;; file tidy.lisp
+(in-package :lantern)
+
 ;;; In tidy data
 ;;; 1.  Each variable forms a column.
 ;;; 2.  Each observation forms a row.
@@ -10,6 +12,7 @@
 ;;; FILTER
 ;;--------------------------------------------------
 ;;; From http://lispblog.xach.com/post/147048601608/querying-plists
+
 
 (defun compile-plist-query (query)
   ;;; From http://lispblog.xach.com/post/147048601608/querying-plists
