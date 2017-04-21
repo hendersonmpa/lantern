@@ -10,13 +10,11 @@
            (up-row (mapcar #'string-upcase row)))
       (mapcar #'alexandria:make-keyword up-row))))
 
-<<<<<<< HEAD
-(defun load-csv (file-name &key (col-names nil))
-=======
-;;(defparameter *header* (get-header "cars.csv"))
 
-(defun load-csv (file-name)
->>>>>>> c656266762e322c674aba5555e7369a6b9a798c1
+;; (defparameter *header* (get-header "cars.csv"))
+;; (defun load-csv (file-name &key (col-names nil))
+
+(defun load-csv (file-name &key (col-names nil))
   "Read a csv into a plist with column names as keys"
   (flet ((process-row (row header)
            (let ((processed
