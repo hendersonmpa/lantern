@@ -1,5 +1,7 @@
 ;;;; database.lisp
 ;;; Code from chapter 27 of PCL
+;;;http://www.gigamonkeys.com/book/practical-an-mp3-database.html
+
 (in-package :lantern)
 
 ;;; "database" goes here. Hacks and glory await!
@@ -77,9 +79,6 @@
 (defun make-schema (spec)
   (mapcar #'(lambda (column-spec) (apply #'make-column column-spec)) spec))
 
-
-
-(defparameter *ri* (make-instance 'table :schema *ri-schema*))
 
 ;;; Inserting values
 
@@ -170,3 +169,31 @@ passed"
            when (funcall comparator b-value a-value) return nil
            finally (return nil)))))
 
+
+;;; Matching functions
+(defun column-matcher (column value)
+  "takes a column object and an unnormalized value you want to match
+and returns a function that accepts a single row and returns true when
+the value of the given column in the row matches the normalized
+version of the given value"
+  (let ((name (name column))
+        (predicate (equality-predicate column))
+        (normalized (normalize-for-column value column)))
+    #'(lambda (row) (funcall predicate (getf row name) normalized))))
+
+(defun column-matchers (schema names-and-values)
+  (loop for (name value) on names-and-values by #'cddr
+     when value collect
+       (column-matcher (find-column name schema) value)))
+
+(defun matching (table &rest names-and-values)
+  "Build a where function that matches rows with the given column values."
+  (let ((matchers (column-matchers (schema table) names-and-values)))
+    #'(lambda (row)
+        (every #'(lambda (matcher) (funcall matcher row)) matchers))))
+
+(defun in (column-name table)
+  (let ((test (equality-predicate (find-column column-name (schema table))))
+        (values (map 'list #'(lambda (r) (getf r column-name)) (rows table))))
+    #'(lambda (row)
+        (member (getf row column-name) values :test test))))
