@@ -22,7 +22,6 @@
 
 
 (defparameter *car-db* (load-database "cars.csv" *car-schema*))
-
 (select :from *car-db* :where (matching *car-db* :model "Toyota Corrolla"))
 
 (normalize-row (subseq *car-data* 0 10) *car-schema*)

@@ -52,5 +52,32 @@ Functions to manipulate  a plist
                     (:not (:= :name "Datsun 710")))))
 #+END_SRC
 
-** Select columns
-   todo
+** Another approach to selecting rows and columns
+#+BEGIN_SRC lisp
+(defparameter *car-schema*
+  (make-schema
+   '((:model string)
+     (:mpg number)
+     (:cyl number)
+     (:disp number)
+     (:hp number)
+     (:drat number)
+     (:wt number)
+     (:qsec number)
+     (:vs number)
+     (:am number)
+     (:gear number)
+     (:carb number))))
+
+(defparameter *car-db* (load-database "cars.csv" *car-schema*))
+
+(select
+ "all entries with the same number of cylinders as a Corrolla"
+ :columns '(:model :cyl)
+ :from *car-db*
+ :where (in :cyl
+            (select
+             :columns :cyl
+             :from *car-db*
+             :where (matching *car-db* :model "Toyota Corolla"))))
+#+END_SRC
