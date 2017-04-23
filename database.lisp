@@ -197,3 +197,30 @@ version of the given value"
         (values (map 'list #'(lambda (r) (getf r column-name)) (rows table))))
     #'(lambda (row)
         (member (getf row column-name) values :test test))))
+
+;;; Get Results
+
+(defmacro do-rows ((row table) &body body)
+  `(loop for ,row across (rows ,table) do ,@body))
+
+(defun map-rows (fn table)
+  (loop for row across (rows table) collect (funcall fn row)))
+
+(defun column-value (row column-name)
+  (getf row column-name))
+
+(defmacro with-column-values ((&rest vars) row &body body)
+  (once-only (row)
+    `(let ,(column-bindings vars row) ,@body)))
+
+(defun column-bindings (vars row)
+  (loop for v in vars collect `(,v (column-value ,row ,(as-keyword v)))))
+
+(defun as-keyword (symbol)
+  (intern (symbol-name symbol) :keyword))
+
+(defun table-size (table)
+  (length (rows table)))
+
+(defun nth-row (n table)
+  (aref (rows table) n))

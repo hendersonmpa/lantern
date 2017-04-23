@@ -18,3 +18,12 @@
   "universal to timestamp"
   (handler-case (local-time:universal-to-timestamp u)
     (type-error () nil)))
+
+
+(defmacro once-only ((&rest names) &body body)
+  "Chapter 8 PCL"
+  (let ((gensyms (loop for n in names collect (gensyms))))
+    `(let (,@(loop for g in gensyms collect `(,g (gensyms))))
+       `(let (,,@ (loop for g  in gensyms for n in names collect ``(,,g ,,n)))
+          ,(let (,@ (loop for n in names for g in gensyms collect `(,n ,g)))
+                ,@body)))))
