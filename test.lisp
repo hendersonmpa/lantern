@@ -28,8 +28,8 @@
 
 (extract-schema '(:name :mpg) *car-schema*)
 
+;;; all entries with the same number of cylinders as a Corrolla
 (select
- "all entries with the same number of cylinders as a Corrolla"
  :columns '(:model :cyl)
  :from *car-db*
  :where (in :cyl
@@ -37,3 +37,14 @@
              :columns :cyl
              :from *car-db*
              :where (matching *car-db* :model "Toyota Corolla"))))
+
+
+
+(let ((table (sort-rows *car-db* :mpg)))
+  (do-rows (row table)
+    (with-column-values (model mpg cyl) row
+      (format t "~a gets ~d mpg with ~d cylinders~%" model mpg cyl))))
+
+(show (sort-rows *car-db* :mpg))
+
+(row-comparator '(:mpg) (schema *car-db*))

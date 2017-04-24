@@ -224,3 +224,43 @@ version of the given value"
 
 (defun nth-row (n table)
   (aref (rows table) n))
+
+(defun sort-rows (table &rest column-names)
+  ;;TODO: change to return a sorted copy of the table
+  (setf (rows table)
+        (sort (rows table) (row-comparator column-names (schema table)))))
+
+(defun shuffle-table (table)
+  (nshuffle-vector (rows table))
+  table)
+
+(defun random-selection (table n)
+  (make-instance
+   'table
+   :schema (schema table)
+   :rows (nshuffle-vector (random-sample (rows table) n))))
+
+(defun random-sample (vector n)
+  "Based on Algorithm S from Knuth, TAOCP, vol. 2. p. 142"
+  (loop with selected = (make-array n :fill-pointer 0)
+     for idx from 0
+     do
+       (loop
+          with to-select = (- n (length selected))
+          for remaining = (- (length vector) idx)
+          while (>= (* remaining (random 1.0)) to-select)
+          do (incf idx))
+       (vector-push (aref vector idx) selected)
+     when (= (length selected) n) return selected))
+
+
+(defun show (table &key (n 10))
+  (let* ((rows (rows table))
+        (l (length rows))
+        ;;(names (mapcar #'name (schema table)))
+        (number (if (> l  n) n l) )
+        )
+    (loop
+       for idx downfrom number to 1
+       for row across rows
+       do (format t "~a~%" row))))

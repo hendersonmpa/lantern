@@ -21,9 +21,19 @@
 
 
 (defmacro once-only ((&rest names) &body body)
-  "Chapter 8 PCL"
-  (let ((gensyms (loop for n in names collect (gensyms))))
-    `(let (,@(loop for g in gensyms collect `(,g (gensyms))))
+  "PCL Chapter 8"
+  (let ((gensyms (loop for n in names collect (gensym))))
+    `(let (,@(loop for g in gensyms collect `(,g (gensym))))
        `(let (,,@ (loop for g  in gensyms for n in names collect ``(,,g ,,n)))
           ,(let (,@ (loop for n in names for g in gensyms collect `(,n ,g)))
                 ,@body)))))
+
+
+(defun nshuffle-vector (vector)
+  "Use the Fisher-Yates algorithm to shuffle vector in place
+PCL Chapter 23"
+  (loop for idx downfrom (1- (length vector)) to 1
+     for other = (random (1+ idx))
+     do (unless (= idx other)
+          (rotatef (aref vector idx) (aref vector other))))
+  vector)
