@@ -38,8 +38,6 @@
              :from *car-db*
              :where (matching *car-db* :model "Toyota Corolla"))))
 
-
-
 (let ((table (sort-rows *car-db* :mpg)))
   (do-rows (row table)
     (with-column-values (model mpg cyl) row

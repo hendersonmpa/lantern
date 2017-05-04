@@ -253,13 +253,11 @@ version of the given value"
        (vector-push (aref vector idx) selected)
      when (= (length selected) n) return selected))
 
-
 (defun show (table &key (n 10))
   (let* ((rows (rows table))
         (l (length rows))
         ;;(names (mapcar #'name (schema table)))
-        (number (if (> l  n) n l) )
-        )
+        (number (if (> l  n) n l) ))
     (loop
        for idx downfrom number to 1
        for row across rows
