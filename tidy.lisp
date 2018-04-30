@@ -103,7 +103,8 @@
                                 (collect-column (rest group) :col denominator-col)
                                 :test #'equalp))))) grouped-data)))
 
- (defun column-freq (data &key (col :mrn))
+
+(defun column-freq (data &key (col :mrn))
   "Create a frequency hashtable at column :COL in data"
   (let ((freq (make-hash-table :test 'equalp))))
   (loop for row in data
@@ -112,6 +113,7 @@
     (maphash #'(lambda (k v) (push (cons v k) freqlist)) freq)
     (loop for (k . v) in (sort freqlist  #'> :key #'car)
        collect (list v k))))
+
 
 ;;--------------------------------------------------
 ;;; SORT

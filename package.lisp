@@ -2,4 +2,6 @@
 
 (defpackage #:lantern
   (:use #:cl
-        #:cl-arrows))
+        #:cl-arrows)
+  (:export :load-csv
+           :handler-parse-number))
