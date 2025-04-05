@@ -26,10 +26,10 @@ data-set structure. Instead, plists will be used to manipulate data.
 ** io [0/1]
 Functions to create a list of p-lists (lopl)
 - [ ] convert strings to numbers when loaded
-** tidy [1/5]
+** tidy [2/5]
 Functions to manipulate  a plist
 - [X] select rows
-- [ ] select columns
+- [X] select columns
 - [ ] aggregate
 - [ ] transform
 - [ ] sort
@@ -39,7 +39,7 @@ Functions to manipulate  a plist
 - [ ] bar chart
 - [ ] histogram
 - [ ] density plot
-- [ ] scatter plot
+- [X] scatter plot
 - [ ] box plot
 - [ ] cumsum plot
 - [ ] timeseries plot

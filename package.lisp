@@ -2,6 +2,13 @@
 
 (defpackage #:lantern
   (:use #:cl
-        #:cl-arrows)
+        ;;#:cl-arrows
+	)
   (:export :load-csv
-           :handler-parse-number))
+           :handler-parse-number
+           :group-by-one
+           :group-by-two
+           :collapse-group
+           :get-colnames
+           :flatten
+           :flatten-once))

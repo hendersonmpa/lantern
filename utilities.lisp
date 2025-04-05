@@ -12,7 +12,8 @@
   "Convert string to number"
   (handler-case (parse-number:parse-number s)
     (parse-error () s)
-    (type-error () s)))
+    (type-error () s)
+    (parse-number:invalid-number () s)))
 
 (defun handler-parse-universal (u)
   "universal to timestamp"
@@ -37,3 +38,18 @@ PCL Chapter 23"
      do (unless (= idx other)
           (rotatef (aref vector idx) (aref vector other))))
   vector)
+
+
+(defun flatten-once (list)
+  "make a list of lists from a nested list of lists"
+  (mapcan #'(lambda (x)
+              (if (listp (car x)) (flatten-once x)
+                  (list x)))
+          list))
+
+(defun flatten (list)
+  "make a list from nested lists"
+  (mapcan #'(lambda (x)
+              (if (listp x) (flatten x)
+                  (list x)))
+          list))

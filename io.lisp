@@ -7,9 +7,9 @@
   (with-open-file (in file-name
                       :direction :input)
     (let* ((row (cl-csv:read-csv-row in))
-           (up-row (mapcar #'string-upcase row)))
-      (mapcar #'alexandria:make-keyword up-row))))
-
+           (up-row (mapcar #'string-upcase row))
+	   (hyphen-row (mapcar #'(lambda (str) (substitute #\- #\SPACE str)) up-row)))
+      (mapcar #'alexandria:make-keyword hyphen-row))))
 
 ;; (defparameter *header* (get-header "cars.csv"))
 ;; (defun load-csv (file-name &key (col-names nil))
@@ -30,3 +30,16 @@
                          :separator #\,
                          :quote nil ;; there are quotes in comment strings
                          :unquoted-empty-string-is-nil t)))))
+
+
+
+
+;; (destructuring-bind (&key a (b :not-found) c
+;;                      &allow-other-keys)
+;;     ’(:c 23 :d "D" :a #\A :foo :whatever)
+;;   (list a b c))
+
+;; (lopl->lol *tsh-data* )
+
+
+;; (get-cols '() (first *tsh-data*))

@@ -9,7 +9,7 @@
                #:eazy-gnuplot
                #:alexandria
                #:parse-number
-               #:cl-arrows
+;;               #:cl-arrows
                #:local-time)
   :serial t
   :components ((:file "package")
@@ -18,4 +18,5 @@
                (:file "stats")
                (:file "io")
                (:file "tidy")
-               (:file "database")))
+               (:file "database")
+	       (:file "plot")))
