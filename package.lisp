@@ -11,4 +11,7 @@
            :collapse-group
            :get-colnames
            :flatten
-           :flatten-once))
+           :flatten-once
+	   :mean
+	   :sd
+	   :zscore))
