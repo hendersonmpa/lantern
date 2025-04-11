@@ -118,6 +118,7 @@
                                 ,@test-list))
                          ,@(mapcar (lambda (key) `(getf ,row ,key)) key-list))))
          (remove-if-not #'filter-p ,data)))))
+
 ;;--------------------------------------------------
 ;;; AGGREGATE
 ;;--------------------------------------------------
@@ -136,6 +137,20 @@
                               :keys (list #'(lambda (row) (getf row (first cols)))
                                           #'(lambda (row) (getf row (second cols))))
                               :tests (list #'equalp)))
+
+
+(defun aggregate-group (data &key group-col sum-col)
+  "(aggregate-group *group-results* :group-col :group-field :test-count)"
+  (flet ((map-groups (grouped-data)
+           (mapcar (lambda (group)
+                     (list (first group)
+                           (apply #'+ (mapcar
+                                       (lambda (row)
+                                         (getf row sum-col))(rest group)))))
+                   grouped-data)))
+    (let* ((grouped-data (create-groups data :col group-col :tests (list #'string-equal)))
+           (clean-data (remove-if #'null grouped-data :key #'car)))
+      (sort (map-groups clean-data) #'> :key #'second))))
 
 
 ;; (create-groups (data-set-data *data-set*) :col :mrn :tests (list #'string-equal))
@@ -166,6 +181,7 @@
              if entry
              do (setf (getf index name) entry)))
     index))
+
 
 (defun column-freq (data &key (col :mrn))
   "Create a frequency hashtable at column :COL in data"
