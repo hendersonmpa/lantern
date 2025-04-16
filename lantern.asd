@@ -9,8 +9,9 @@
                #:eazy-gnuplot
                #:alexandria
                #:parse-number
-;;               #:cl-arrows
-               #:local-time)
+               ;;#:cl-arrows
+               #:local-time
+	       #:cl-date-time-parser)
   :serial t
   :components ((:file "package")
                (:file "lantern")

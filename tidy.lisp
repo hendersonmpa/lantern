@@ -152,6 +152,11 @@
            (clean-data (remove-if #'null grouped-data :key #'car)))
       (sort (map-groups clean-data) #'> :key #'second))))
 
+(defun create-groups (data &key col (tests (list #'equalp)))
+  "Group on COL using TESTS"
+  (group-by:group-by-repeated data
+                              :keys (list #'(lambda (row) (getf row col)))
+                              :tests tests))
 
 ;; (create-groups (data-set-data *data-set*) :col :mrn :tests (list #'string-equal))
 
