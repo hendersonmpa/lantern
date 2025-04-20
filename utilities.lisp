@@ -56,6 +56,13 @@
 							:format '(:year "-" (:month 2) "-" (:day 2)))))
     new-date-string))
 
+(defun universal-time->date-string (universal-time)
+  (local-time:format-timestring nil
+				(local-time:universal-to-timestamp universal-time)
+				:format '(:year "-" (:month 2) "-" (:day 2))))
+
+
+(universal-time->date-string 3925771200)
 
 
 (defun minutes-float (time-string)
