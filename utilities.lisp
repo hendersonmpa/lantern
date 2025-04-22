@@ -62,7 +62,7 @@
 				:format '(:year "-" (:month 2) "-" (:day 2))))
 
 
-(universal-time->date-string 3925771200)
+;;(universal-time->date-string 3925771200)
 
 
 (defun minutes-float (time-string)

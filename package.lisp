@@ -14,7 +14,7 @@
    :flatten
    :flatten-once
    :format-date
-   :univeral-time->date-string
+   :universal-time->date-string
    :mean
    :sd
    :zscore))
